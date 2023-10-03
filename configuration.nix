@@ -47,10 +47,23 @@
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
 
-  # Enable hyperlandWM
-  programs.hyprland.enable = true; 
+  # Enable hyperland
+  programs.hyprland = {
+	enable = true;
+	nvidiaPatches = true;
+	xwayland.enable = true;
+  }; 
+  
+  # tells elecron apps to use wayland
+  environment.sessionVariables = {
+	NIXOS_OZONE_WL = "1";
+  };
+  
+  hardware = {
+	opengl.enable = true;
+	nvidia.modesetting.enable = true;
+  };
 
   # Enable lightDM
   # services.xserver.displayManager.lightdm.enable = true;
@@ -66,7 +79,6 @@
 
   # Enable Nvidia drivers
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.opengl.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -119,15 +131,25 @@
    # Apps
     alacritty
     ranger
+    mpv
+    swayimg
+    rofi-wayland
+   #Setting up github
     git
     gnupg
-    docker
-   # Dispaly
-    rofi-wayland
+   # waybar and the backgroud
     waybar
-    pavucontrol
-    mpd
     hyprpaper
+   # notifications
+    dunst 
+    libnotify
+   # screenshot utils
+    grim
+    slurp
+    wl-clipboard
+    wf-recorder
+    home-manager
+   # 
   ];
 
   # Used to activate gnupg 
@@ -143,9 +165,6 @@ programs.gnupg.agent = {
     roboto-mono    
   ];
 
-  # Allows docker to run
-  virtualisation.docker.enable = true;
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -155,6 +174,9 @@ programs.gnupg.agent = {
   # };
 
   # List services that you want to enable:
+
+  # Enable Nix experimental features for nix flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
