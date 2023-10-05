@@ -128,26 +128,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-   # Apps
+   # System apps
     alacritty
-    ranger
-    mpv
-    swayimg
-    rofi-wayland
-   #Setting up github
     git
     gnupg
-   # waybar and the backgroud
-    waybar
-    hyprpaper
-   # notifications
-    dunst 
-    libnotify
-   # screenshot utils
-    grim
-    slurp
-    wl-clipboard
-    wf-recorder
     home-manager
    # 
   ];
