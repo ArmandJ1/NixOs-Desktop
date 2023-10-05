@@ -13,6 +13,5 @@ cp -r ~/.config/waybar $savedir
 
 cd $savedir
 git add ./
-read -p "what is the commit message W- for working and B- for broken: " commit_message
-git commit -m $commit_message
+git commit
 git push origin main
