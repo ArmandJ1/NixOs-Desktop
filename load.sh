@@ -6,14 +6,24 @@ sudo mv ./configuration.nix /etc/nixos/configuration.nix
 
 # Configuring hyprland and hyprpaper
 mkdir ~/.config/hypr
-mv ./hyprland.conf ~/.config/hypr
-mv ./hyprpaper.conf ~/.config/hypr
+cp ./hyprland.conf ~/.config/hypr
+cp ./hyprpaper.conf ~/.config/hypr
 
 # Configuring waybar
 mkdir ~/.config/waybar
-mv ./style.css ./.config/waybar/
-mv ./config.jsonc ./.config/waybar/
+cp ./style.css ~/.config/waybar/
+cp ./config.jsonc ~/.config/waybar/
 
 # Update and rebuild the system
 sudo nix-channel --update
 sudo nixos-rebuild switch
+
+choiceFunction() {
+read -p "Do you want to remove the files that were copyed [y:N]: " choice
+if [$choice == y*]; then
+rm configuration.nix hyprland.conf hyprpaper.conf style.css config.jsonc
+else [$choice == n*]; then
+	exit
+else 
+	choiceFunction()
+fi

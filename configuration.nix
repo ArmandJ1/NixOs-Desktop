@@ -55,11 +55,11 @@
 	xwayland.enable = true;
   }; 
   
-  # tells elecron apps to use wayland
+  # Tells elecron apps to use wayland
   environment.sessionVariables = {
 	NIXOS_OZONE_WL = "1";
   };
-  
+  # For nvidia GPU
   hardware = {
 	opengl.enable = true;
 	nvidia.modesetting.enable = true;
@@ -130,10 +130,30 @@
   environment.systemPackages = with pkgs; [
    # System apps
     alacritty
+    lf
+    mpv
+    swayimg
+    rofi-wayland
+    neofetch
+    neovim
+   # Setting up github
     git
     gnupg
+   # Waybar and back ground apps
+    waybar
+    pavucontrol
+    hyprpaper
+   # Notifications
+    dunst
+    libnotify
+   # Screenshot utils
+    grim
+    slurp
+   # Privacy
+    tor-browser-bundle-bin
+    librewolf
+   # Testing for nix
     home-manager
-   # 
   ];
 
   # Used to activate gnupg 
